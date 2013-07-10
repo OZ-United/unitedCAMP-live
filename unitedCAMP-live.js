@@ -18,10 +18,15 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 app.use(express.favicon());
 app.use(express.logger('dev'));
-app.use(express.bodyParser());
+app.use(express.bodyParser({
+  uploadDir: __dirname + '/public/images/tmp',
+  keepExtensions: true
+}));
+app.use(express.limit('3mb'));
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('./middleware/error')());
 
 // development only
 if ('development' == app.get('env')) {
@@ -64,5 +69,5 @@ app.get('/users', user.list);
 var server = http.createServer(app);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + server.address().port);
-  ltld.update("united-camp-live", server.address().port);
+  ltld.update('united-camp-live', server.address().port);
 });

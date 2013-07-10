@@ -4,8 +4,9 @@ var error = require('../lib/error');
 var crypto = require('crypto');
 
 var UserModelSchema = new Schema({
-  email:  { type: String, index: { unique: true, sparse: true }, required: true, lowercase: true, trim: true},
-  password:   { type: String, required: true }
+  email: { type: String, index: { unique: true, sparse: true }, required: true, lowercase: true, trim: true},
+  password: { type: String, required: true },
+  name: { type: String }
 },{
   toObject:  { virtuals: true },
   toJSON:    { virtuals: true }

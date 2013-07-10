@@ -32,6 +32,7 @@ exports.create = function(req, res, next){
   var user = {};
   user.password = req.body.password;
   user.email = req.body.email;
+  user.name = req.body.name;
 
   new UserModel(user).save(function(err, user){
     if (err) {
@@ -65,6 +66,7 @@ exports.update = function(req, res, next){
     if (! user) { return next(new error.NotFound('User does not exist.')); }
 
     user.password = req.body.password;
+    user.name = req.body.name;
     user.email = req.body.email;
 
     user.save(function(err, user){

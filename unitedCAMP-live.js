@@ -49,7 +49,7 @@ db.once('open', function callback () {
  */
 
 var routes = require('./routes');
-var user = require('./routes/user');
+var users = require('./routes/users');
 
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -63,7 +63,11 @@ app.all('/*', function(req, res, next) {
 });
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+
+app.get('/users', users.query);
+app.post('/users', users.create);
+app.put('/users/:userId', users.query);
+app.delete('/users/:userId', users.remove);
 
 
 var server = http.createServer(app);

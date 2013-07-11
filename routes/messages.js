@@ -10,7 +10,7 @@ var eventEmitter = new events.EventEmitter();
 
 exports.query = function(req, res, next){
   var from = req.query.from || new Date().toISOString();
-  var LIMIT = 10;
+  var LIMIT = 50;
   MessageModel.find({'date': { $lt: from }})
   .populate('author', 'email name gravatar userId')
   .sort({'date': -1}).limit(LIMIT)
@@ -58,25 +58,28 @@ exports.remove = function(req, res, next){
 
 exports.watch = function(req, res, next){
   if (!(req.headers.accept && req.headers.accept == 'text/event-stream')) {
-    return next(new error.NotAcceptable('Use sse request.'));
+    return next(new error.NotAcceptable('Use SSE request.'));
   }
+
+  var id = (new Date()).toLocaleTimeString();
 
   res.writeHead(200, {
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache',
     'Connection': 'keep-alive'
-
-    // "Access-Control-Allow-Origin": "*",
-    // "Access-Control-Allow-Headers": "X-Requested-With, Content-Type",
-    // "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS"
   });
 
   res.socket.on('close', function () {
-    console.log('close');
+    console.log('SSE: close ' + id);
+    if (interval) {
+      clearInterval(interval);
+    }
     res.end();
   });
 
-  var id = (new Date()).toLocaleTimeString();
+  var interval = setInterval(function(){
+    constructSSE(res, id, '', false, true);
+  }, 60000);
 
   eventEmitter.on('newmsg', function(msg){
     constructSSE(res, id, JSON.stringify(msg));
@@ -84,15 +87,22 @@ exports.watch = function(req, res, next){
 
 };
 
-var constructSSE = function(res, id, data, close) {
-  res.write('id: ' + id + '\n');
-  res.write('data: ' + data + '\n\n');
-  console.log('constructSSE: write');
+var constructSSE = function(res, id, data, close, loop) {
+  if (data.length) {
+    res.write('id: ' + id + '\n');
+    res.write('data: ' + data + '\n\n');
+    console.log('SSE: write ' + id);
+  }
 
   if (close) {
     res.write('id: ' + id + '\n');
     res.write('event: ' + 'close' + '\n\n');
-    console.log('constructSSE: res end');
+    console.log('SSE: res end ' + id);
     res.end();
+  }
+  else if (loop) {
+    res.write('id: ' + id + '\n');
+    res.write('event: ' + 'loop' + '\n\n');
+    console.log('SSE: loop ' + id);
   }
 };

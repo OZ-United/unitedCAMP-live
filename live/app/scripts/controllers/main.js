@@ -57,6 +57,6 @@ angular.module('liveApp')
   }, false);
 
   source.addEventListener('error', function(e) {
-    source.close();
+    console.log(e);
   }, false);
 });

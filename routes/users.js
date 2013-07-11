@@ -83,3 +83,17 @@ exports.update = function(req, res, next){
     });
   });
 };
+
+exports.auth = function(req, res, next){
+  UserModel.findOne({'email': req.body.email}, function(err, user){
+    if (err) { return next(error); }
+    if (! user) { return next(new error.NotFound('User does not exist.')); }
+
+    if (user.auth(req.body.password)){
+      res.json(user);
+    }
+    else {
+      return next(new error.NotFound('User does not exist.'));
+    }
+  });
+};

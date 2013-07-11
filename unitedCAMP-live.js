@@ -50,6 +50,7 @@ db.once('open', function callback () {
 
 var routes = require('./routes');
 var users = require('./routes/users');
+var messages = require('./routes/messages');
 
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -71,6 +72,9 @@ app.post('/users/auth', users.auth);
 app.put('/users/:userId', users.query);
 app.delete('/users/:userId', users.remove);
 
+app.get('/messages', messages.query);
+app.post('/messages', messages.create);
+app.delete('/messages/:messageId', messages.remove);
 
 var server = http.createServer(app);
 server.listen(app.get('port'), function(){

@@ -24,4 +24,23 @@ angular.module('liveApp')
       $scope.messages.splice(index, 1);
     });
   };
+
+  $scope.showNewMessages = function(){
+    $scope.messages = $scope.newMessages.concat($scope.messages);
+    $scope.newMessages = [];
+  };
+
+  $scope.newMessages = [];
+  var source = new EventSource('http://united-camp-live.dev/messages/watch');
+  var that = this;
+  source.addEventListener('message', function(e) {
+    var data = JSON.parse(e.data);
+    $scope.newMessages.splice(0, 0, data);
+    console.log(data);
+    $scope.$apply();
+  }, false);
+
+  source.addEventListener('error', function(e) {
+    source.close();
+  }, false);
 });

@@ -17,6 +17,9 @@
 </section>
 
 <section>
+  <div ng-show="newMessages.length > 0" ng-click="showNewMessages()">
+    <p>{{newMessages.length}} nové správy</p>
+  </div>
   <div ng-repeat="msg in messages">
     <header>
       <h4>{{msg.author.name || msg.author.email}}</h4>

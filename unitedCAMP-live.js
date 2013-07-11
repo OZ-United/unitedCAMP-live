@@ -72,6 +72,7 @@ app.post('/users/auth', users.auth);
 app.put('/users/:userId', users.query);
 app.delete('/users/:userId', users.remove);
 
+app.get('/messages/watch', messages.watch);
 app.get('/messages', messages.query);
 app.post('/messages', messages.create);
 app.delete('/messages/:messageId', messages.remove);

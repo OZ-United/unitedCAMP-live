@@ -32,5 +32,5 @@ angular.module('liveApp')
     'isLoggedIn' : function(){
       return isLoggedIn;
     }
-  });
+  };
 });

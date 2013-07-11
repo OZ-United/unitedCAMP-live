@@ -3,8 +3,8 @@
 angular.module('liveApp')
 .factory('Auth', function ($http, $q) {
 
-  var user = {};
-  var isLoggedIn = false;
+  var STORAGE_ID = 'united-camp-live';
+  var user = JSON.parse(localStorage.getItem(STORAGE_ID) || '{}');
 
   return {
     'login' : function(user){
@@ -12,7 +12,7 @@ angular.module('liveApp')
       $http.post('http://united-camp-live.dev/users/auth', user).
         success(function(data, status, headers, config) {
           user = data;
-          isLoggedIn = true;
+          localStorage.setItem(STORAGE_ID, JSON.stringify(user));
           deferred.resolve(user);
         }).
         error(function(data, status, headers, config) {
@@ -23,14 +23,13 @@ angular.module('liveApp')
     },
     'logout' : function(){
       user = {};
-      isLoggedIn = false;
       return user;
     },
     'getUser' : function(){
       return user;
     },
     'isLoggedIn' : function(){
-      return isLoggedIn;
+      return user.email ? true : false;
     }
   };
 });

@@ -25,7 +25,24 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view></div>
+    <header class="nav">
+      <div class="container">
+        <a href="#/user/" ng-show="rootuser.email">
+          <div class="user">
+            <img ng-src="{{rootuser.gravatar}}" width="46px" height="46px" alt="gravatar">
+            <span>{{rootuser.name || rootuser.email}}</span>
+          </div>
+        </a>
+
+        <a href="#/auth/" ng-hide="rootuser.email">
+          <span>Prihlásiť</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- {{user | json}} -->
+
+    <div class="container container-app" ng-view></div>
 
     <script src="components/angular/angular.js"></script>
     <script src="components/angular-resource/angular-resource.js"></script>
@@ -36,6 +53,7 @@
     <script src="scripts/services/Auth.js"></script>
     <script src="scripts/services/Message.js"></script>
     <script src="scripts/controllers/auth.js"></script>
+    <script src="scripts/controllers/user.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

@@ -14,4 +14,8 @@ angular.module('liveApp')
         });
     }
   };
+
+  $scope.cancel = function(){
+    $location.path('/');
+  };
 });

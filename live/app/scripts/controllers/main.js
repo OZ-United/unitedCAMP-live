@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('liveApp')
-.controller('MainCtrl', function ($scope, Message, Auth) {
+.controller('MainCtrl', function ($scope, Message, Auth, user) {
 
   var getFrom = function(){
     return $scope.messages && $scope.messages[$scope.messages.length -1].date || new Date().toISOString();
@@ -9,7 +9,7 @@ angular.module('liveApp')
 
   $scope.from = getFrom();
   $scope.messages = Message.query({'from': $scope.from});
-  $scope.user = Auth.getUser();
+  $scope.user = user;
 
   $scope.post = function(){
     if ($scope.postForm.$valid) {

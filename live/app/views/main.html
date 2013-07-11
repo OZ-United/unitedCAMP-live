@@ -1,0 +1,41 @@
+<section style="margin: 20px auto;" ng-show="user.email">
+  <form class="form" ng-submit="post()" name="postForm">
+    <div class="control-group">
+    <div class="controls">
+    <textarea ng-model="message.text" id="inputText" cols="30" rows="5" style="width:96%;" required></textarea>
+    </div>
+    </div>
+
+    <div class="control-group">
+    <div class="controls">
+    <button type="submit" class="btn btn-success btn-block">Pridať</button>
+    </div>
+    </div>
+  </form>
+</section>
+
+<section class="messages">
+  <div ng-show="newMessages.length > 0" ng-click="showNewMessages()">
+    <p><button class="btn btn-block">+ {{newMessages.length}}</button></p>
+  </div>
+
+  <div ng-repeat="msg in messages" class="message">
+    <div ng-click="msg.show = !msg.show">
+      <header>
+        <h4 class="message-author">
+          {{msg.author.name || msg.author.email}}
+        </h4>
+        <p><small class="message-date">{{msg.date | date:'medium'}}</small></p>
+      </header>
+
+      <p class="message-text">{{msg.text}}</p>
+    </div>
+    <footer>
+        <button ng-show="msg.author.userId == user.userId && msg.show" class="btn btn-link btn-block" ng-click="remove(msg)">vymazať</button>
+    </footer>
+  </div>
+
+  <div ng-click="loadMore()" ng-hide="nomore">
+    <p><button class="btn btn-block">staršie</button></p>
+  </div>
+</section>

@@ -7,16 +7,16 @@ angular.module('liveApp')
   var isLoggedIn = false;
 
   return {
-    'login' : function(email, password){
+    'login' : function(user){
       var deferred = $q.defer();
-      $http.post('http://united-camp-live.dev/users/auth', {'email': email, 'password': password}).
+      $http.post('http://united-camp-live.dev/users/auth', user).
         success(function(data, status, headers, config) {
           user = data;
           isLoggedIn = true;
           deferred.resolve(user);
         }).
         error(function(data, status, headers, config) {
-          deferred.reject();
+          deferred.reject(data);
         });
 
       return deferred.promise;

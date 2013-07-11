@@ -1,0 +1,65 @@
+@import "compass_twitter_bootstrap";
+
+[ng-cloak] { display: none; }
+
+html, body { padding: 0; margin: 0; font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif; }
+
+body {
+  padding-top: 50px;
+}
+
+div, section, a {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: black;
+  color: white;
+  font-weight: bold;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+
+  a {
+    @include unstyled-link;
+  }
+}
+
+.user {
+  float: left;
+  img {
+    margin-right: 15px;
+  }
+}
+.container {
+  width: 100%;
+  max-width: 600px;
+}
+
+.container-app {
+  padding: 5%;
+}
+
+.form {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.messages {
+  margin: 25px auto;
+}
+
+.message {
+  border-top: 1px solid rgb(100,100,255);
+}
+
+.message-author {
+  font-weight: 200;
+  font-size: 16px;
+}

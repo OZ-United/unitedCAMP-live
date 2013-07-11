@@ -11,7 +11,7 @@ var eventEmitter = new events.EventEmitter();
 exports.query = function(req, res, next){
   var from = req.query.from || new Date().toISOString();
   var LIMIT = 10;
-  MessageModel.find({'date': { $lte: from }})
+  MessageModel.find({'date': { $lt: from }})
   .populate('author', 'email name gravatar userId')
   .sort({'date': -1}).limit(LIMIT)
   .exec(function(err, messages){

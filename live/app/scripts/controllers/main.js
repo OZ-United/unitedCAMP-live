@@ -2,7 +2,12 @@
 
 angular.module('liveApp')
 .controller('MainCtrl', function ($scope, Message, Auth) {
-  $scope.from = $scope.messages && $scope.messages[$scope.messages.length -1].date || new Date().toISOString();
+
+  var getFrom = function(){
+    return $scope.messages && $scope.messages[$scope.messages.length -1].date || new Date().toISOString();
+  };
+
+  $scope.from = getFrom();
   $scope.messages = Message.query({'from': $scope.from});
   $scope.user = Auth.getUser();
 
@@ -25,6 +30,17 @@ angular.module('liveApp')
     });
   };
 
+  $scope.loadMore = function(){
+    $scope.from = getFrom();
+    Message.query({'from': $scope.from}, function(more){
+      console.log(more);
+      $scope.messages = $scope.messages.concat(more);
+      if (more.length === 0) {
+        $scope.nomore = true;
+      }
+    });
+  };
+
   $scope.showNewMessages = function(){
     $scope.messages = $scope.newMessages.concat($scope.messages);
     $scope.newMessages = [];
@@ -32,7 +48,7 @@ angular.module('liveApp')
 
   $scope.newMessages = [];
   var source = new EventSource('http://united-camp-live.dev/messages/watch');
-  var that = this;
+
   source.addEventListener('message', function(e) {
     var data = JSON.parse(e.data);
     $scope.newMessages.splice(0, 0, data);

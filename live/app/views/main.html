@@ -30,4 +30,7 @@
       <button ng-show="msg.author.userId == user.userId" class="btn btn-link" ng-click="remove(msg)">vymazať</button>
     </footer>
   </div>
+  <div ng-click="loadMore()" ng-hide="nomore">
+    <p>staršie</p>
+  </div>
 </section>

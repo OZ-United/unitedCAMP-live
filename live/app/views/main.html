@@ -2,6 +2,29 @@
 
 <section style="margin: 50px auto;">
   <form class="form" ng-submit="post()" name="postForm">
+    <div class="control-group">
+    <div class="controls">
+    <textarea ng-model="message.text" id="inputText" cols="30" rows="10" style="width:100%;" required></textarea>
+    </div>
+    </div>
 
+    <div class="control-group">
+    <div class="controls">
+    <button type="submit" class="btn btn-success btn-block">Pridať</button>
+    </div>
+    </div>
   </form>
+</section>
+
+<section>
+  <div ng-repeat="msg in messages">
+    <header>
+      <h4>{{msg.author.name || msg.author.email}}</h4>
+      <p><small>{{msg.date | date:'medium'}}</small></p>
+    </header>
+    <p>{{msg.text}}</p>
+    <footer>
+      <button ng-show="msg.author.userId == user.userId" class="btn btn-link" ng-click="remove(msg)">vymazať</button>
+    </footer>
+  </div>
 </section>

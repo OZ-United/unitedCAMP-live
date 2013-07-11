@@ -11,8 +11,8 @@ exports.query = function(req, res, next){
   var from = req.query.from || new Date().toISOString();
   var LIMIT = 10;
   MessageModel.find({'date': { $lte: from }})
-  .populate('author', 'email name')
-  .sort('date').limit(LIMIT)
+  .populate('author', '-password')
+  .sort({'date': -1}).limit(LIMIT)
   .exec(function(err, messages){
     if (err) { return next(error); }
     res.json(messages);

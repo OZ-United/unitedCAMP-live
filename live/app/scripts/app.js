@@ -30,9 +30,9 @@ angular.module('liveApp', ['ngResource'])
   $rootScope.$on( '$routeChangeStart', function(event, next, current) {
     console.log(next.templateUrl);
 
-    if ( !Auth.isLoggedIn() ) {
-      if ( next.templateUrl == '/views/login.html' ) {
-
+    if ( Auth.isLoggedIn() ) {
+      if ( next.templateUrl == 'views/auth.html' ) {
+        $location.path( '/' );
       } else {
         // $location.path( '/auth' );
       }

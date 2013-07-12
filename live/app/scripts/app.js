@@ -1,17 +1,17 @@
 'use strict';
 
 angular.module('liveApp', ['ngResource'])
-.config(function ($routeProvider) {
+.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'views/main.html',
       controller: 'MainCtrl',
       resolve: {
-        'user': function(Auth){
+        'user': ['Auth', function(Auth){
           var user = Auth.getUser();
           console.log(user);
           return user;
-        }
+        }]
       }
     })
     .when('/auth', {
@@ -25,8 +25,8 @@ angular.module('liveApp', ['ngResource'])
     .otherwise({
       redirectTo: '/'
     });
-})
-.run(function($rootScope, $location, Auth){
+}])
+.run(['$rootScope', '$location', 'Auth', function($rootScope, $location, Auth){
   $rootScope.$on( '$routeChangeStart', function(event, next, current) {
     console.log(next.templateUrl);
 
@@ -38,4 +38,4 @@ angular.module('liveApp', ['ngResource'])
       }
     }
   });
-});
+}]);

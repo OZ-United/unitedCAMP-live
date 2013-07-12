@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('liveApp')
-.controller('UserCtrl', function ($scope, Auth, $location) {
+.controller('UserCtrl', ['$scope', 'Auth', '$location', function ($scope, Auth, $location) {
   $scope.user = JSON.parse(JSON.stringify(Auth.getUser()));
   $scope.user.password = '';
 
@@ -26,4 +26,4 @@ angular.module('liveApp')
         });
     }
   };
-});
+}]);

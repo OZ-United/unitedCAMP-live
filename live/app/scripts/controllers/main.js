@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('liveApp')
-.controller('MainCtrl', function ($scope, Message, Auth, user) {
+.controller('MainCtrl', ['$scope', 'Message', 'Auth', 'user', function ($scope, Message, Auth, user) {
 
   var getFrom = function(){
     return $scope.messages && $scope.messages.length && $scope.messages[$scope.messages.length -1].date || new Date().toISOString();
@@ -59,4 +59,4 @@ angular.module('liveApp')
   source.addEventListener('error', function(e) {
     console.log(e);
   }, false);
-});
+}]);

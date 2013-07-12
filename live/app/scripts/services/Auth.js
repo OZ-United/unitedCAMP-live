@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('liveApp')
-.factory('Auth', function ($http, $q, $rootScope) {
+.factory('Auth', ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
   var STORAGE_ID = 'united-camp-live';
   $rootScope.rootuser = JSON.parse(localStorage.getItem(STORAGE_ID) || '{}');
 
@@ -48,4 +48,4 @@ angular.module('liveApp')
       return $rootScope.rootuser.login ? true : false;
     }
   };
-});
+}]);

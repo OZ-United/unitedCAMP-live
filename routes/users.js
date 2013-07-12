@@ -19,6 +19,7 @@ exports.create = function(req, res, next){
   user.email = req.body.email;
   user.login = req.body.login;
   user.name = req.body.name;
+  user.admin = req.body.admin;
 
   new UserModel(user).save(function(err, user){
     if (err) {
@@ -55,6 +56,7 @@ exports.update = function(req, res, next){
     user.name = req.body.name;
     user.login = req.body.login;
     user.email = req.body.email;
+    user.admin = req.body.admin;
 
     user.save(function(err, user){
       if (err) {

@@ -7,7 +7,8 @@ var UserModelSchema = new Schema({
   login: { type: String, index: { unique: true, sparse: true }, required: true, lowercase: true, trim: true},
   email: { type: String, lowercase: true, trim: true},
   password: { type: String, required: true },
-  name: { type: String }
+  name: { type: String },
+  admin: { type: Boolean, default: false }
 },{
   toObject:  { virtuals: true },
   toJSON:    { virtuals: true }
@@ -18,7 +19,7 @@ UserModelSchema.virtual("userId").get(function(){
 });
 
 UserModelSchema.virtual("gravatar").get(function(){
-  var hash = crypto.createHash('md5').update(this.email || '').digest("hex");
+  var hash = crypto.createHash('md5').update(this.email || 'ozunited@antala.sk').digest("hex");
   return 'http://gravatar.com/avatar/' + hash + '?s=50&d=mm';
 });
 

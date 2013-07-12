@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('liveApp')
-.factory('Message', function ($resource) {
+.factory('Message', ['$resource', function ($resource) {
   return $resource('http://united-camp-live.dev/messages/:messageId', { messageId: '@messageId', from: '@from' }, {
     'create' : { method: 'POST', params: { } },
     'query'   : { method: 'GET', params: { }, isArray: true },
@@ -9,4 +9,4 @@ angular.module('liveApp')
     'remove'  : { method: 'DELETE', params: { } },
     'delete'  : { method: 'DELETE', params: { } }
   });
-});
+}]);

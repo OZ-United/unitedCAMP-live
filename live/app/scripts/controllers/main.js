@@ -4,7 +4,7 @@ angular.module('liveApp')
 .controller('MainCtrl', function ($scope, Message, Auth, user) {
 
   var getFrom = function(){
-    return $scope.messages && $scope.messages[$scope.messages.length -1].date || new Date().toISOString();
+    return $scope.messages && $scope.messages.length && $scope.messages[$scope.messages.length -1].date || new Date().toISOString();
   };
 
   $scope.from = getFrom();

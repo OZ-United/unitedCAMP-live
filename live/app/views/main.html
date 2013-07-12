@@ -25,7 +25,7 @@
         <h4 class="message-author">
           {{msg.author.name || msg.author.email}}
         </h4>
-        <p><small class="message-date">{{msg.date | date:'medium'}}</small></p>
+        <p><small class="message-date">{{msg.date | date:'EEEE dd-MM-yyyy HH:mm'}}</small></p>
       </header>
 
       <p class="message-text">{{msg.text}}</p>

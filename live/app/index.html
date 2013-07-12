@@ -27,14 +27,14 @@
     <!-- Add your site or application content here -->
     <header class="nav">
       <div class="container">
-        <a href="#/user/" ng-show="rootuser.email">
+        <a href="#/user/" ng-show="rootuser.login">
           <div class="user">
             <img ng-src="{{rootuser.gravatar}}" width="46px" height="46px" alt="gravatar">
             <span>{{rootuser.name || rootuser.email}}</span>
           </div>
         </a>
 
-        <a href="#/auth/" ng-hide="rootuser.email">
+        <a href="#/auth/" ng-hide="rootuser.login">
           <span>Prihlásiť</span>
         </a>
       </div>

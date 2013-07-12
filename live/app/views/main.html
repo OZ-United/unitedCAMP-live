@@ -31,7 +31,7 @@
       <p class="message-text">{{msg.text}}</p>
     </div>
     <footer>
-        <button ng-show="msg.author.userId == user.userId && msg.show" class="btn btn-link btn-block" ng-click="remove(msg)">vymazať</button>
+        <button ng-show="(msg.author.userId == user.userId || user.admin) && msg.show" class="btn btn-link btn-block" ng-click="remove(msg)">vymazať</button>
     </footer>
   </div>
 

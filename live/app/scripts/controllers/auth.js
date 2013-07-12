@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('liveApp')
-.controller('AuthCtrl', function ($scope, Auth, $location) {
+.controller('AuthCtrl', ['$scope', 'Auth', '$location', function ($scope, Auth, $location) {
   $scope.login = function(){
     if ($scope.loginForm.$valid) {
       Auth.login($scope.user)
@@ -18,4 +18,4 @@ angular.module('liveApp')
   $scope.cancel = function(){
     $location.path('/');
   };
-});
+}]);

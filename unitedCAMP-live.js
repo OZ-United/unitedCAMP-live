@@ -60,10 +60,11 @@ app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Credentials", "true");
   res.header("Access-Control-Max-Age", "86400");
 
+  console.log(req.headers);
   if (req.headers["X-App-Origin"]) { 
     req.headers["Origin"] = req.headers["X-App-Origin"];
   }
-
+  console.log(req.headers);
   if ('OPTIONS' == req.method) {
     res.send(200);
   }

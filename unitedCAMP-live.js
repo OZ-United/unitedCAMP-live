@@ -82,7 +82,7 @@ app.put('/users/:userId', users.update);
 app.delete('/users/:userId', users.remove);
 
 app.get('/messages/watch', messages.watch);
-app.post('/messages/query', messages.watch);
+app.post('/messages/query', messages.query);
 app.get('/messages', messages.query);
 app.post('/messages', messages.create);
 app.delete('/messages/:messageId', messages.remove);

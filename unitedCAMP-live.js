@@ -23,6 +23,7 @@ app.use(express.bodyParser({
   keepExtensions: true
 }));
 app.use(express.limit('3mb'));
+app.use(express.compress());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));

@@ -9,7 +9,7 @@ angular.module('liveApp')
 
   $scope.from = getFrom();
   $scope.messages = Message.query({'from': $scope.from}, function(messages){
-    console.log(messages);
+    console.log(JSON.stringify(messages));
   }, function(err){
     console.log(JSON.stringify(err));
   });

@@ -9,6 +9,7 @@ var events = require('events');
 var eventEmitter = new events.EventEmitter();
 
 exports.query = function(req, res, next){
+  console.log(req.headers);
   var from = req.query.from || new Date().toISOString();
   var LIMIT = 50;
   MessageModel.find({'date': { $lt: from }})

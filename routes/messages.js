@@ -17,6 +17,7 @@ exports.query = function(req, res, next){
   .sort({'date': -1}).limit(LIMIT)
   .exec(function(err, messages){
     if (err) { return next(error); }
+    console.log(messages);
     res.json(messages);
   });
 };

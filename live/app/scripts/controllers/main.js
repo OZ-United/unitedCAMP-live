@@ -15,6 +15,19 @@ angular.module('liveApp')
   });
   $scope.user = user;
 
+  $scope.showupdate = true;
+
+  $scope.reloadMessages = function(){
+    $scope.showupdate = false;
+    $scope.messages = Message.query({}, function(messages){
+      $scope.newMessages = [];
+      $scope.showupdate = true;
+      console.log(JSON.stringify(messages));
+    }, function(err){
+      console.log(JSON.stringify(err));
+    });
+  };
+
   $scope.post = function(){
     if ($scope.postForm.$valid) {
       $scope.message.author = $scope.user.userId;

@@ -53,7 +53,7 @@ angular.module('liveApp')
   $scope.newMessages = [];
   window.setTimeout(function(){
 
-    var source = new EventSource('http://united-camp-live.janantala.com/messages/watch');
+    var source = new EventSource('/messages/watch');
 
     source.addEventListener('message', function(e) {
       var data = JSON.parse(e.data);

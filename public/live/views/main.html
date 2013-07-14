@@ -7,10 +7,10 @@
     </div>
 
     <div class="control-group">
-    <div class="controls" ng-show="140 - message.text.length >= 0 || message.text.length == 0">
+    <div class="controls" ng-show="140 - message.text.length >= 0 && message.text.length > 0">
       <button type="submit" class="btn btn-success btn-block">Pridať ({{140 - message.text.length}})</button>
     </div>
-    <div class="controls" ng-hide="140 - message.text.length >= 0 || message.text.length == 0">
+    <div class="controls" ng-hide="140 - message.text.length >= 0 && message.text.length > 0">
       <button disabled="disabled" type="submit" class="btn btn-success btn-block">Pridať ({{140 - message.text.length}})</button>
     </div>
     </div>

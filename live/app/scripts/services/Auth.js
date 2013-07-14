@@ -8,7 +8,7 @@ angular.module('liveApp')
   return {
     'login' : function(user){
       var deferred = $q.defer();
-      $http.post('http://united-camp-live.janantala.com/users/auth', user).
+      $http.post('/users/auth', user).
         success(function(user, status, headers, config) {
           $rootScope.rootuser = user;
           localStorage.setItem(STORAGE_ID, JSON.stringify(user));
@@ -23,7 +23,7 @@ angular.module('liveApp')
     },
     'update' : function(user){
       var deferred = $q.defer();
-      $http.put('http://united-camp-live.janantala.com/users/' + user.userId, user).
+      $http.put('/users/' + user.userId, user).
         success(function(user, status, headers, config) {
           $rootScope.rootuser = user;
           localStorage.setItem(STORAGE_ID, JSON.stringify(user));

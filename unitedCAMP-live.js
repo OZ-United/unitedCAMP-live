@@ -23,6 +23,7 @@ app.use(express.bodyParser({
   keepExtensions: true
 }));
 app.use(express.limit('3mb'));
+app.use(express.compress());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -54,11 +55,17 @@ var messages = require('./routes/messages');
 
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "*, X-Requested-With, Content-Type, If-Modified-Since, If-None-Match");
+  res.header("Access-Control-Allow-Headers", "*, X-Requested-With, X-App-Origin, Content-Type, If-Modified-Since, If-None-Match");
   res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD");
   res.header("Access-Control-Expose-Headers", "ETag");
   res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Max-Age", "86400");
+  res.header("Access-Control-Max-Age", "0");
+
+  console.log(req.headers);
+  if (req.headers["X-App-Origin"]) { 
+    req.headers["Origin"] = req.headers["X-App-Origin"];
+  }
+
   if ('OPTIONS' == req.method) {
     res.send(200);
   }

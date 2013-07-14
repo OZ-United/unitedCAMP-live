@@ -2,9 +2,11 @@
 
 angular.module('liveApp')
 .factory('Message', ['$resource', function ($resource) {
-  return $resource('http://united-camp-live.dev/messages/:messageId', { messageId: '@messageId', from: '@from' }, {
+  var origin = window.location.protocol + '//' + window.location.host;
+  console.log(origin);
+  return $resource('/messages/:messageId', { messageId: '@messageId' }, {
     'create' : { method: 'POST', params: { } },
-    'query'   : { method: 'GET', params: { }, isArray: true },
+    'query'   : { method: 'GET', headers: { 'X-App-Origin': origin}, params: { from: '@from' }, isArray: true },
     'update'  : { method: 'PUT', params: { } },
     'remove'  : { method: 'DELETE', params: { } },
     'delete'  : { method: 'DELETE', params: { } }

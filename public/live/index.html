@@ -23,7 +23,22 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <header class="nav">
+    <header class="nav" style="z-index: 100">
+      <div class="container">
+        <a href="#/user/" ng-show="rootuser.login">
+          <div class="user">
+            <img ng-src="{{rootuser.gravatar}}" width="46px" height="46px" alt="gravatar">
+            <span>{{rootuser.name || rootuser.email}}</span>
+          </div>
+        </a>
+
+        <a href="#/auth/" ng-hide="rootuser.login">
+          <span>Prihlásiť</span>
+        </a>
+      </div>
+    </header>
+
+    <header class="nav" style="position: absolute">
       <div class="container">
         <a href="#/user/" ng-show="rootuser.login">
           <div class="user">
@@ -45,7 +60,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-resource.min.js"></script>
 
-    <script src="scripts/8572e76a.scripts.js"></script>
+    <script src="scripts/ec3cad31.scripts.js"></script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>

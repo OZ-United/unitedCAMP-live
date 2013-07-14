@@ -28,7 +28,7 @@ angular.module('liveApp')
   console.log(origin);
   return $resource('/messages/:query:messageId', { messageId: '@messageId' }, {
     'create' : { method: 'POST', params: { } },
-    'query'   : { method: 'POST', headers: { 'X-App-Origin': origin}, params: { from: '@from', query: 'query' }, isArray: true },
+    'query'   : { method: 'GET', headers: { 'X-App-Origin': origin}, params: { from: '@from', query: 'query' }, isArray: true },
     'update'  : { method: 'PUT', params: { } },
     'remove'  : { method: 'DELETE', params: { } },
     'delete'  : { method: 'DELETE', params: { } }

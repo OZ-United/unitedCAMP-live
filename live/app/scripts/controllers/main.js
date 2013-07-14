@@ -8,7 +8,11 @@ angular.module('liveApp')
   };
 
   $scope.from = getFrom();
-  $scope.messages = Message.query({'from': $scope.from});
+  $scope.messages = Message.query({'from': $scope.from}, function(messages){
+    console.log(JSON.stringify(messages));
+  }, function(err){
+    console.log(JSON.stringify(err));
+  });
   $scope.user = user;
 
   $scope.post = function(){
@@ -47,16 +51,19 @@ angular.module('liveApp')
   };
 
   $scope.newMessages = [];
-  var source = new EventSource('http://united-camp-live.dev/messages/watch');
+  window.setTimeout(function(){
 
-  source.addEventListener('message', function(e) {
-    var data = JSON.parse(e.data);
-    $scope.newMessages.splice(0, 0, data);
-    console.log(data);
-    $scope.$apply();
-  }, false);
+    var source = new EventSource('/messages/watch');
 
-  source.addEventListener('error', function(e) {
-    console.log(e);
-  }, false);
+    source.addEventListener('message', function(e) {
+      var data = JSON.parse(e.data);
+      $scope.newMessages.splice(0, 0, data);
+      console.log(data);
+      $scope.$apply();
+    }, false);
+
+    source.addEventListener('error', function(e) {
+    }, false);
+
+  }, 1000);
 }]);

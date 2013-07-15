@@ -22,7 +22,7 @@ angular.module('liveApp')
     $scope.messages = Message.query({}, function(messages){
       $scope.newMessages = [];
       $scope.showupdate = true;
-      console.log(JSON.stringify(messages));
+      // console.log(JSON.stringify(messages));
     }, function(err){
       console.log(JSON.stringify(err));
     });
